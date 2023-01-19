@@ -1,0 +1,34 @@
+<ng-container *ngIf="getUsersCards$ | async as usersCards">
+  <div class="container">
+    <table class="container__table">
+      <thead class="table__header">
+      <tr class="table__header_container">
+        <th class="table__header_column">User id</th>
+        <th class="table__header_column">first_name</th>
+        <th class="table__header_column">last_name</th>
+        <th class="table__header_column">pat_name</th>
+        <th class="table__header_column">phone</th>
+        <th class="table__header_column">email</th>
+        <th class="table__header_column">birthday</th>
+        <th class="table__header_column">loyalty_level</th>
+        <th class="table__header_column">summ</th>
+        <th class="table__header_column">discount</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let userCard of usersCards">
+        <td class="table__body">{{userCard.user_id}}</td>
+        <td class="table__body">{{userCard.first_name}}</td>
+        <td class="table__body">{{userCard.last_name}}</td>
+        <td class="table__body">{{userCard.pat_name}}</td>
+        <td class="table__body">{{userCard.phone}}</td>
+        <td class="table__body">{{userCard.email}}</td>
+        <td class="table__body">{{userCard.birthday}}</td>
+        <td class="table__body">{{userCard.loyalty_level}}</td>
+        <td class="table__body">{{userCard.summ}}</td>
+        <td class="table__body">{{userCard.discount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
