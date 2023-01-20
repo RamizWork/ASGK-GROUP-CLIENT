@@ -1,21 +1,35 @@
 import {Component, OnInit} from '@angular/core';
-import {DataFromApiService} from "./services/dataFromApiService";
-import {Observable} from "rxjs";
-import {ResponseFromApiInterface} from "./interfaces/responseFromApi.interface";
+
+import {AuthService} from "./services/auth.service";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-  title = 'asgk-group-client';
-  loadDataFromApi$!: Observable<ResponseFromApiInterface>;
-
-  constructor(private dataFromApiService: DataFromApiService) {
+export class AppComponent implements OnInit {
+  constructor(private dataFromApiService: AuthService) {
   }
 
   ngOnInit() {
-    this.loadDataFromApi$ = this.dataFromApiService.loadUsersFromApi();
+    this.checkOnAuthorization();
+    this.checkUrlToken();
+  }
+
+  checkUrlToken(): void {
+    const urlToken = this.dataFromApiService.getUrlToken();
+
+    if (urlToken) {
+      this.dataFromApiService.setUrlTokenToBehavior(urlToken);
+    }
+  }
+
+  checkOnAuthorization(): void {
+    const token = localStorage.getItem('auth-token');
+
+    if (!!token) {
+      this.dataFromApiService.setAuthorization(true);
+    }
   }
 }

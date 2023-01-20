@@ -1,4 +1,4 @@
-import {UsersCardsInterface} from "./usersCards.Interface";
+import {UsersDataInterface} from "./usersDataInterface";
 
 export interface ResponseFromApiInterface {
   meta: {
@@ -6,5 +6,5 @@ export interface ResponseFromApiInterface {
     limit: number;
     offset: number;
   };
-  passes: UsersCardsInterface[];
+  passes: UsersDataInterface[];
 }

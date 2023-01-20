@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Observable, of} from "rxjs";
-import {DataFromApiService} from "../../services/dataFromApiService";
+import {EMPTY, Observable, of} from "rxjs";
+import {AuthService} from "../../services/auth.service";
 import {catchError, tap} from "rxjs/operators";
 import {UserLoginInterface} from "../../interfaces/userLogin.interface";
 import {Router} from "@angular/router";
+import {AuthorizationInterface} from "../../interfaces/authorization.interface";
 
 @Component({
   selector: 'app-login-page',
@@ -13,9 +14,9 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit {
   form!: FormGroup;
-  userResponse$!: Observable<any>;
+  login$!: Observable<AuthorizationInterface>;
 
-  constructor(private dataFromApiService: DataFromApiService, private router: Router) {
+  constructor(private dataFromApiService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,11 +35,13 @@ export class LoginPageComponent implements OnInit {
       login: this.form.value.login,
       password: this.form.value.password
     }
-    this.userResponse$ = this.dataFromApiService.getAuthKeyFromApi(userData).pipe(
+    this.login$ = this.dataFromApiService.login(userData).pipe(
       tap(() => {
-        this.router.navigate(['main']);
+        this.router.navigate(['']);
       }),
-      catchError(error => of())
+      catchError(error => {
+        return EMPTY;
+      })
     )
   }
 

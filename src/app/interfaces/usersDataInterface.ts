@@ -1,4 +1,4 @@
-export interface UsersCardsInterface {
+export interface UsersDataInterface {
       user_id: number,
       template: string,
       fio: string,

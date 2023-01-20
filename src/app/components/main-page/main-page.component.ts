@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {DataFromApiService} from "../../services/dataFromApiService";
-import {UsersCardsInterface} from "../../interfaces/usersCards.Interface";
-import {tap, map} from "rxjs/operators";
+
+import {ResponseFromApiInterface} from "../../interfaces/responseFromApi.interface";
+import {UsersDataInterface} from "../../interfaces/usersDataInterface";
+import {UsersDataService} from "../../services/users-data.service";
 
 @Component({
   selector: 'app-main-page',
@@ -10,9 +11,9 @@ import {tap, map} from "rxjs/operators";
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-
-  getUsersCards$!: Observable<UsersCardsInterface[]>;
-  columnTitle: string[] = [
+  loadUsersData$!: Observable<ResponseFromApiInterface>;
+  getUsersData$!: Observable<UsersDataInterface[]>;
+  columnsToDisplay: string[] = [
     'user_id',
     'first_name',
     'last_name',
@@ -25,11 +26,12 @@ export class MainPageComponent implements OnInit {
     'discount',
   ];
 
-  constructor(private dataFromApiService: DataFromApiService) {
+  constructor(private userDataService: UsersDataService) {
   }
 
   ngOnInit(): void {
-    this.getUsersCards$ = this.dataFromApiService.getUsersCards();
+    this.loadUsersData$ = this.userDataService.loadUsersData();
+    this.getUsersData$ = this.userDataService.getUsersData();
   }
 
 }
