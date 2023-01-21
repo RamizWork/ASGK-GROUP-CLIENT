@@ -7,19 +7,22 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {MatTableModule} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSortModule} from "@angular/material/sort";
+import {MatDialogModule} from "@angular/material/dialog";
+import {ToastrModule} from "ngx-toastr";
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginPageComponent} from './components/login-page/login-page.component';
 import {AuthService} from "./services/auth.service";
 import {MainPageComponent} from './components/main-page/main-page.component';
-import {MatTableModule} from "@angular/material/table";
 import {HeaderComponent} from './components/header/header.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {AuthGuard} from "./auth.guard";
 import {UsersDataService} from "./services/users-data.service";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatSortModule} from "@angular/material/sort";
+import { ModalPushMessageComponent } from './components/modal-push-message/modal-push-message.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import {MatSortModule} from "@angular/material/sort";
     LoginPageComponent,
     MainPageComponent,
     HeaderComponent,
+    ModalPushMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import {MatSortModule} from "@angular/material/sort";
     HttpClientModule,
     MatTableModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

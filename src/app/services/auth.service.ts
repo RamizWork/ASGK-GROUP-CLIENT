@@ -7,6 +7,7 @@ import {switchMap, tap} from "rxjs/operators";
 import {LoginResponse} from "../interfaces/loginResponse.interface";
 import {UserLoginInterface} from "../interfaces/userLogin.interface";
 import {AuthorizationInterface} from "../interfaces/authorization.interface";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
   }
 
   login(userRequestData: UserLoginInterface): Observable<AuthorizationInterface> {
-    return this.http.post<LoginResponse>(`https://api.asgk-group.ru/test-auth-only`, userRequestData)
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/test-auth-only`, userRequestData)
       .pipe(
         switchMap((response: LoginResponse) => {
           if (response.auth_token) {
@@ -35,7 +36,7 @@ export class AuthService {
         Authorization: authToken
       })
     }
-    return this.http.get<AuthorizationInterface>(`https://api.asgk-group.ru/v1/authorization`, headers)
+    return this.http.get<AuthorizationInterface>(`${environment.apiUrl}/v1/authorization`, headers)
       .pipe(
         tap((response: AuthorizationInterface) => {
             if (response.tokens[0].token) {
@@ -65,7 +66,7 @@ export class AuthService {
   }
 
   getAuthToken() {
-    return localStorage.getItem('auth-token')
+    return localStorage.getItem('auth-token');
   }
 
   setAuthToken(authToken: string): void {
@@ -85,6 +86,4 @@ export class AuthService {
   getIsAuthorization(): Observable<boolean> {
     return this.isAuthenticated$.asObservable();
   }
-
-
 }

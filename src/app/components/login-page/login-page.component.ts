@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {EMPTY, Observable, of} from "rxjs";
-import {AuthService} from "../../services/auth.service";
-import {catchError, tap} from "rxjs/operators";
-import {UserLoginInterface} from "../../interfaces/userLogin.interface";
 import {Router} from "@angular/router";
+import {EMPTY, Observable} from "rxjs";
+import {catchError, tap} from "rxjs/operators";
+
 import {AuthorizationInterface} from "../../interfaces/authorization.interface";
+import {UserLoginInterface} from "../../interfaces/userLogin.interface";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-login-page',
