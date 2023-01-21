@@ -18,6 +18,8 @@ import {HeaderComponent} from './components/header/header.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 import {AuthGuard} from "./auth.guard";
 import {UsersDataService} from "./services/users-data.service";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSortModule} from "@angular/material/sort";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import {UsersDataService} from "./services/users-data.service";
     MatIconModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatCheckboxModule,
+    MatSortModule
   ],
   providers: [
     {

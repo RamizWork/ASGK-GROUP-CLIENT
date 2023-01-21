@@ -1,4 +1,4 @@
-.container {
+.container__table {
   margin: 50px auto;
   width: 1200px;
 
@@ -6,7 +6,11 @@
     width: 100%;
 
     .table__column_title {
+      font-weight: 500;
       font-size: 17px;
     }
   }
+}
+.mat-header-cell {
+  text-align: center;
 }

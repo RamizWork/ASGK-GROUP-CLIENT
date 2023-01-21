@@ -1,11 +1,11 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 import {BehaviorSubject, Observable} from "rxjs";
 import {switchMap, tap} from "rxjs/operators";
 
 import {LoginResponse} from "../interfaces/loginResponse.interface";
 import {UserLoginInterface} from "../interfaces/userLogin.interface";
-import {Router} from "@angular/router";
 import {AuthorizationInterface} from "../interfaces/authorization.interface";
 
 @Injectable()
@@ -38,12 +38,13 @@ export class AuthService {
     return this.http.get<AuthorizationInterface>(`https://api.asgk-group.ru/v1/authorization`, headers)
       .pipe(
         tap((response: AuthorizationInterface) => {
-          if (response.tokens[0].token) {
-            this.setAuthorization(true);
-            this.setUrlToken(response.tokens[0].token);
-            this.urlToken$.next(response.tokens[0].token);
+            if (response.tokens[0].token) {
+              this.setAuthorization(true);
+              this.setUrlToken(response.tokens[0].token);
+              this.urlToken$.next(response.tokens[0].token);
+            }
           }
-        })
+        )
       );
   }
 
@@ -51,7 +52,7 @@ export class AuthService {
     return this.urlToken$;
   }
 
-  setUrlTokenToBehavior(urlToken: string): void{
+  setUrlTokenToBehavior(urlToken: string): void {
     this.urlToken$.next(urlToken);
   }
 
