@@ -1,6 +1,6 @@
 .container__table {
   margin: 50px auto;
-  width: 1200px;
+  max-width: 1200px;
 
   .table__wrapper {
     width: 100%;
@@ -18,4 +18,10 @@
 
 .mat-row {
   cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  .container__table {
+
+  }
 }

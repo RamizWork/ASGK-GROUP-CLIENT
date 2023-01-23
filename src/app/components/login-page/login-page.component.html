@@ -4,13 +4,13 @@
     <mat-form-field appearance="outline" class="input__block">
       <mat-label>login</mat-label>
       <input matInput class="login__input login" formControlName="login" type="text">
-      <mat-hint *ngIf="form.get('login')?.touched && form.get('login')?.errors?.required">Login not be empty</mat-hint>
+      <mat-hint [style.color]="'red'" *ngIf="form.get('login')?.touched && form.get('login')?.errors?.required">Login not be empty</mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="input__block">
       <mat-label>Password</mat-label>
       <input matInput class="login__input password" formControlName="password" type="text">
-      <mat-hint *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+      <mat-hint [style.color]="'red'" *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
         <small *ngIf="form.get('password')?.errors?.required">Login not be empty</small>
         <small *ngIf="form.get('password')?.errors?.minlength">The length must be more than 4 characters</small>
       </mat-hint>
@@ -18,7 +18,7 @@
 
     <mat-card-actions align="end">
       <button mat-raised-button color="basic">Cancel</button>
-      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Login</button>
     </mat-card-actions>
   </mat-card>
 </form>
